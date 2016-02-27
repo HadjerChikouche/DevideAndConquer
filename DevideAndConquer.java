@@ -1,13 +1,16 @@
 public class DevideAndConquer{
 
-
 	public static void main(String[] args){
 		int[] array2 = {8,7,6,5,6,4,6,3,2};
 		displayArray("array2",array2);
 		displayArray("array2 sorted", sort(array2));
 	}
 
-
+	/**
+	 * Display an array with its name
+	 * @param name
+	 * @param a
+     */
 	public static void displayArray(String name,int[] a){
 		System.out.println();
 		System.out.print(name +" : ");
@@ -17,7 +20,12 @@ public class DevideAndConquer{
 	}
 
 
-	public static int[] size(int[] v){
+	/**
+	 * get the left array with half size of the original array (array in parameter).
+	 * @param v
+	 * @return an array with 0 values with the good size.
+     */
+	public static int[] sizeL(int[] v){
 		int[]l;
 		int size=v.length;
 
@@ -31,7 +39,12 @@ public class DevideAndConquer{
 	}
 
 
-	public static int[] sizer(int[] v){
+	/**
+	 * get the right array with half size of the original array (array in parameter)
+	 * @param v
+	 * @return an array with 0 values with the good size.
+     */
+	public static int[] sizeR(int[] v){
 
 		int[]r;
 		int size=v.length;
@@ -46,8 +59,13 @@ public class DevideAndConquer{
 	}
 
 
-
-	public static int[] split(int[]v,int[]r){
+	/**
+	 * it puts the values of the array as parameter in the right sub-array.
+	 * @param v
+	 * @param r
+	 * @return filled right sub-array.
+     */
+	public static int[] fillR(int[]v,int[]r){
 		for(int i=0;i<r.length;i++){
 			r[i]=v[i];
 		}
@@ -55,7 +73,13 @@ public class DevideAndConquer{
 	}
 
 
-	public static int[] splitr(int[]v,int[]l){
+	/**
+	 * it puts the values of the array as parameter in the left sub-array.
+	 * @param v
+	 * @param l
+	 * @return filled left sub-array.
+     */
+	public static int[] fillL(int[]v,int[]l){
 		int j=l.length-1;
 		int lengthV = v.length;
 		int lengthL = l.length;
@@ -67,7 +91,12 @@ public class DevideAndConquer{
 	}
 
 
-
+	/**
+	 * it merges the two sub-arrays l and r into array.
+	 * @param array
+	 * @param l
+	 * @param r
+     */
 	public static void merge(int[] array,int[]l,int[]r){
 
 		int j=0;int k=0;
@@ -83,9 +112,14 @@ public class DevideAndConquer{
 	}
 
 
+	/**
+	 * call recusively the sort method that sort and merge an array.
+	 * @param array
+	 * @return sorted array
+     */
 	public static int[] sort(int[]array){
 		if(array.length>1){
-			merge(array, sort(split(array,sizer(array))), sort(splitr(array,size(array))));
+			merge(array, sort(fillL(array,sizeL(array))), sort(fillR(array,sizeR(array))));
 		}
 		return array;
 	}
